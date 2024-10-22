@@ -1,21 +1,23 @@
 import React, { useState } from 'react';
 
 const App = () => {
-    const [name,setName] = useState("");
-    const [email,setEmail] = useState("");
+    const [formData, setFormData] = useState({ name: '', email: '' });
+    const [response, setResponse] = useState(null);
 
-   
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setFormData((prev) => ({ ...prev, [name]: value }));
+    };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const userdata = {name,email}
         try {
             const res = await fetch('https://formdeploytest.onrender.com/submit', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify(userdata),
+                body: JSON.stringify(formData),
             });
 
             const data = await res.json();
@@ -32,17 +34,13 @@ const App = () => {
                 <div>
                     <label>
                         Name:
-                        <input type="text" name="name" value={name} onChange={(e)=>{
-                         setName(e.target.value)
-                        }} required />
+                        <input type="text" name="name" value={formData.name} onChange={handleChange} required />
                     </label>
                 </div>
                 <div>
                     <label>
                         Email:
-                        <input type="email" name="email" value={email} onChange={(e)=>{
-                         setEmail(e.target.value)
-                        }} required />
+                        <input type="email" name="email" value={formData.email} onChange={handleChange} required />
                     </label>
                 </div>
                 <button type="submit">Submit</button>
