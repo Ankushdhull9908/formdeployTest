@@ -35,7 +35,7 @@ const App = () => {
                         Name:
                         <input type="text" name="name" value={name} onChange={(e)=>{
                          setName(e.target.value)
-                        }} </input> required />
+                        }} required />
                     </label>
                 </div>
                 <div>
@@ -43,7 +43,7 @@ const App = () => {
                         Email:
                         <input type="email" name="email" value={email} onChange={(e)=>{
                          setEmail(e.target.value)
-                        }}</input> required />
+                        }} required />
                     </label>
                 </div>
                 <button type="submit">Submit</button>
